@@ -13,10 +13,6 @@ class FormsController < ApplicationController
 		puts "----XXXXX------XXXXX----"
 		images = form_params["images"]
 
-		
-
-
-
 		images_typeform_ids = []
 
 
@@ -31,15 +27,23 @@ class FormsController < ApplicationController
 			images_typeform_ids << response["id"]
 		end
 
-		puts images_typeform_ids
-
-		obj = {:type => "picture_choice", :question => "Which kitten is the cutest?",:choices => []}
-
+		debugger
+		field = {:type => "picture_choice", :question => form_params["question"], :choices => []}
 
 		images_typeform_ids.each do |id|
-			obj[:choices] << {image_id: id}
+			field[:choices] << {:image_id => id.to_s, :label => ""}
 		end
 
+		response = conn.post do |req|
+		  req.url '/v0.3/forms' 
+		  req.headers['X-API-TOKEN'] = 'b5ce1b063bedf822ffc6668a0ad5d50a'
+		  req.headers['Content-Type'] = 'application/json'
+		  req.body = {:title => "Pickalo", :fields => [field]}.to_json
+		end
+
+		response = JSON.parse response.body
+
+		render json: {link: response["links"].last}, status: 201
 
 	end
 
