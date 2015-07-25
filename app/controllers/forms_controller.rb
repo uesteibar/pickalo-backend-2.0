@@ -22,7 +22,6 @@ class FormsController < ApplicationController
     option_id = sorted_answers.first[0]
     count = sorted_answers.first[1]
     result = Option.find(option_id).attributes.merge({votes: count})
-    debugger
     render json: result, status: 200
   end
 
