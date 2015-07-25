@@ -11,7 +11,7 @@ class FormsController < ApplicationController
       form.options.create(image_url: choice[:image_url], typeform_id: choice['image_id'])
     end
 
-    render json: { link: response['links'].last }, status: 201
+    render json: { link: response['links'].last['href'], id: form.id }, status: 201
   end
 
   def winner
