@@ -7,6 +7,5 @@ class AnswersController < ApplicationController
       form.answers.create(option_id: option.id)
     end
     render status: 200, body: 'good!'
-    # Answer.create()
   end
 end
