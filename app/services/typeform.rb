@@ -40,7 +40,7 @@ class Typeform
     generate_images.each do |image|
       field[:choices] << { image_id: image[:id].to_s, label: image[:id].to_s }
     end
-    { title: 'Pickalo', webhook_submit_url: "http://requestb.in/xvhysvxv", fields: [field] }.to_json
+    { title: 'Pickalo', webhook_submit_url: "http://67e90eb3.ngrok.com/answers", fields: [field] }.to_json
   end
 
   def generate_images
