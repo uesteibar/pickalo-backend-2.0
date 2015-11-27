@@ -9,7 +9,7 @@ class TypeformService
   def create_form(question:, options:)
     response = @conn.post do |req|
       req.url "/v0.4/forms"
-      req.headers["X-API-TOKEN"] = ""
+      req.headers["X-API-TOKEN"] = Rails.application.secrets.typeform_api_key
       req.body = request_body(question, options).to_json
     end
     JSON.parse response.body
