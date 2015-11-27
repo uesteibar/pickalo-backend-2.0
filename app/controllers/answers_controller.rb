@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
     form = Form.find_by(typeform_id: params['id'])
     if form
       option = form.options.find_by(typeform_id: params['answers'].first['data']['value']['label'])
-      form.answers.create(option_id: option.id)
+      # save answer
     end
     render status: 200, body: 'good!'
   end
