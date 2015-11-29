@@ -5,6 +5,7 @@ RSpec.describe Form, type: :model do
     @form_params = {
       typeform_id: "ab44c7",
       typeform_url: "https://forms.typeform.io/to/ab44c7",
+      question: "where for dinner?"
     }
   end
 
@@ -28,6 +29,14 @@ RSpec.describe Form, type: :model do
 
     it "does not create a form when typeform_url is missing" do
       @form_params[:typeform_url] = nil
+
+      expect do
+        Form.create(@form_params)
+      end.to change(Form.all, :count).by 0
+    end
+
+    it "does not create a form when question is missing" do
+      @form_params[:question] = nil
 
       expect do
         Form.create(@form_params)
