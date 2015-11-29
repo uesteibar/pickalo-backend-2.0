@@ -1,4 +1,9 @@
 class FormsController < ApplicationController
+  def show
+    form = Form.find params[:id]
+    render status: 200, body: ApiPresenters::Form.new(form).as_json
+  end
+
   def create
     typeform_form = TypeformService.new.create_form question: form_params[:question], options: form_params[:options]
 
