@@ -11,9 +11,9 @@ module ApiPresenters
         form: {
           id: form.id,
           question: form.question,
-          link: form.typeform_url
+          link: form.typeform_url,
         },
-        options: form.options.map(&:label)
+        answers: form.results
       }.to_json
     end
   end

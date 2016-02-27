@@ -1,11 +1,12 @@
 class TypeformService
   def initialize
     @conn = Faraday.new(:url => "https://api.typeform.io") do |faraday|
-      faraday.request  :url_encoded             # form-encode POST params
-      faraday.response :logger                  # log requests to STDOUT
-      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter  Faraday.default_adapter
     end
   end
+
   def create_form(question:, options:)
     response = @conn.post do |req|
       req.url "/v0.4/forms"
