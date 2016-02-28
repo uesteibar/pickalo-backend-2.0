@@ -24,11 +24,11 @@ RSpec.describe Form, type: :model do
     end
 
     it "retuns the correct options" do
-      options_as_json = JSON.parse(@subject.as_json)["options"]
+      options_as_json = JSON.parse(@subject.as_json)["answers"]
 
       expect(options_as_json.size).to eq @form.options.count
-      expect(options_as_json.first).to eq @form.options.first.label
-      expect(options_as_json.second).to eq @form.options.second.label
+      expect(options_as_json.first.fetch("option")).to eq @form.options.first.label
+      expect(options_as_json.second.fetch("option")).to eq @form.options.second.label
     end
   end
 end

@@ -41,7 +41,6 @@ RSpec.describe FormsController, type: :controller do
       parsed_form = JSON.parse(response.body)["form"]
 
       expect(parsed_form["id"]).not_to be_falsy
-      expect(parsed_form["link"]).to eq @typeform_form_stub["_links"].second["href"]
     end
   end
 end
