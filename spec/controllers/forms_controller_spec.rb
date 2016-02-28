@@ -1,6 +1,21 @@
 require "rails_helper"
 
 RSpec.describe FormsController, type: :controller do
+  describe "GET #index" do
+    before (:each) do
+      @form_one = Form.create(typeform_id: "ab44c7", typeform_url: "https://forms.typeform.io/to/ab44c7", question: "where for dinner?")
+      @form_two = Form.create(typeform_id: "ab48c0", typeform_url: "https://forms.typeform.io/to/ab48c0", question: "where for lunch?")
+      @form_ids = [@form_one.id, @form_two.id]
+    end
+
+    it "gets the requested forms" do
+      get :index, ids: @form_ids
+
+      parsed_forms = JSON.parse response.body
+
+      expect(parsed_forms.size).to eq(@form_ids.size)
+    end
+  end
 
   describe "GET #show" do
     before (:each) do
