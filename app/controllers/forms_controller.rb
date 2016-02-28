@@ -1,8 +1,6 @@
 class FormsController < ApplicationController
   def index
-    forms = Form.where("id IN (?)", params[:ids])
-
-    render status: 200, body: forms.map { |f| ApiPresenters::Form.new(f).as_json }
+    render status: 200, body: forms_for_user.map { |f| ApiPresenters::Form.new(f).as_json }
   end
 
   def show
@@ -20,6 +18,10 @@ class FormsController < ApplicationController
   end
 
   private
+
+  def forms_for_user
+    params[:ids].present? ? Form.where("id IN (#{params[:ids]})") : []
+  end
 
   def form_params
     params.require(:form).permit(:question, options: [])
