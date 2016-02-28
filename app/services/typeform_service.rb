@@ -21,7 +21,7 @@ class TypeformService
   def request_body(question, options)
     {
       title: "Created with Pickalo",
-      webhook_submit_url: "https://78edee3a.ngrok.com/answers",
+      webhook_submit_url: "http://pickalo.herokuapp.com/answers",
       fields: [
         {
           type: "multiple_choice",
