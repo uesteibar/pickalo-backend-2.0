@@ -1,6 +1,6 @@
 class FormsController < ApplicationController
   def index
-    forms = Form.where(id: params[:ids])
+    forms = Form.where("id IN (?)", params[:ids])
 
     render status: 200, body: forms.map { |f| ApiPresenters::Form.new(f).as_json }
   end

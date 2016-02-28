@@ -12,8 +12,10 @@ module ApiPresenters
           id: form.id,
           question: form.question,
           link: form.typeform_url,
+          created_at: form.created_at
         },
-        answers: form.results
+        answers: form.results,
+        total_votes: form.answers.count
       }.to_json
     end
   end
